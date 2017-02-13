@@ -31,7 +31,7 @@ class YdhSpider:
         return data
 
 
-def main():
+def debug():
     spider = YdhSpider()
     areas = spider.grab_area_data()
     for country in areas:
@@ -46,13 +46,24 @@ def main():
                     print '            ' + district['name']
 
 
-def main2():
+def main():
     spider = YdhSpider()
     areas = spider.get_area_dict()
-    print areas
+    countrys = sorted(areas.keys())
+    for country in countrys:
+        provinces = sorted(areas[country].keys())
+        for province in provinces:
+            print province + ': '
+            citys = sorted(areas[country][province].keys())
+            for city in citys:
+                print '  ' + city + ': '
+                countys = sorted(areas[country][province][city])
+                if countys:
+                    print '    -'
+                for county in countys:
+                    print '      ' + county
 
 if __name__ == '__main__':
-    # main2()
     main()
 
 
